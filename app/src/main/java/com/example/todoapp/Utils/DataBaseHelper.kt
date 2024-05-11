@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import com.example.todoapp.model.ToDoModel
 
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
@@ -34,6 +35,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         values.put(COL_3, model.status)
         db = this.writableDatabase
         db.insert(TABLE_NAME, null, values)
+        Log.d("DatabaseHelper", "Inserted new task with ID: $COL_1, Task: ${model.task}, Status: ${model.status}")
     }
 
     fun updateTask(id: Int, task: String) {
@@ -43,12 +45,14 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db.update(TABLE_NAME, values, "$COL_1 = ?", arrayOf(id.toString()))
     }
 
-    fun updateStatus(id: Int, status: Int) {
-        db = this.writableDatabase
+    fun updateStatus(id: Int, status: String) {
+        val db = this.writableDatabase // Use a local database object
         val values = ContentValues()
-        values.put(COL_3, status)
+        values.put(COL_3, status) // Directly use integer for status
         db.update(TABLE_NAME, values, "$COL_1 = ?", arrayOf(id.toString()))
+        db.close() // Close database connection to avoid leaks
     }
+
 
     fun deleteTask(id: Int) {
         db = this.writableDatabase
@@ -86,5 +90,19 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         }
         return modelList
     }
+
+    fun getUnfinishedTaskCount(): Int {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT COUNT(*) FROM $TABLE_NAME WHERE $COL_3 = 0", null)
+        var count = 0
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                count = cursor.getInt(0)
+            }
+            cursor.close()
+        }
+        return count
+    }
+
 
 }

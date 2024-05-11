@@ -17,13 +17,27 @@
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-         />
+        />
+
+    <TextView
+        android:id="@+id/unfinishedTaskCountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvtodo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:text="Unfinished Tasks: "
+        android:textColor="#000"
+        android:textSize="16sp"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyletodo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/recyletodo"
-        android:layout_below="@+id/tvtodo"
-        android:nestedScrollingEnabled="true"/>
+        android:layout_below="@id/unfinishedTaskCountTextView"
+        android:layout_marginTop="8dp"
+        android:nestedScrollingEnabled="true" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -36,4 +50,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"
         android:src="@drawable/baseline_add_24"/>
+
+
+
 </RelativeLayout>
