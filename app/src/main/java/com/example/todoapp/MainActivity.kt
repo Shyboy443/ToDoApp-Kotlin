@@ -59,4 +59,8 @@ class MainActivity : AppCompatActivity(), OnDialogCloseListener {
         adapter.notifyDataSetChanged()
         adapter.setTasks(mList)
     }
+    fun onTaskDeleted() {
+        loadTasks()
+    }
+
 }

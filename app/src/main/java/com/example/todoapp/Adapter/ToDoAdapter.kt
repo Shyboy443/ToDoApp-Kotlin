@@ -59,12 +59,15 @@ class ToDoAdapter(private val myDB: DatabaseHelper, private val activity: MainAc
     }
 
 
+    @SuppressLint("NotifyDataSetChanged")
     fun deleteTask(position: Int) {
         val item = mList[position]
         myDB.deleteTask(item.id)
-        mList.toMutableList().removeAt(position)
-        notifyItemRemoved(position)
+        mList = mList.filterIndexed { index, _ -> index != position } // Remove item from mList
+        notifyDataSetChanged()
+        activity.onTaskDeleted()
     }
+
 
     fun editItem(position: Int) {
         val item = mList[position]
