@@ -19,6 +19,7 @@ import com.example.todoapp.R
 import com.example.todoapp.model.ToDoModel
 import com.example.todoapp.utils.DatabaseHelper
 
+@Suppress("DEPRECATION")
 class ToDoAdapter(private val myDB: DatabaseHelper, private val activity: MainActivity) :
     RecyclerView.Adapter<ToDoAdapter.MyViewHolder>() {
 
@@ -30,9 +31,10 @@ class ToDoAdapter(private val myDB: DatabaseHelper, private val activity: MainAc
 
     private var mList: List<ToDoModel> = listOf()
 
+    @Suppress("DEPRECATION")
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val mCheckBox: CheckBox = itemView.findViewById(R.id.matchbox)
-        val mDescription: TextView = itemView.findViewById(R.id.text_description)
+        private val mDescription: TextView = itemView.findViewById(R.id.text_description)
         val mPriority: TextView = itemView.findViewById(R.id.text_priority)
         init {
             itemView.setOnClickListener {
@@ -100,6 +102,7 @@ class ToDoAdapter(private val myDB: DatabaseHelper, private val activity: MainAc
     }
 
 
+    @SuppressLint("InflateParams")
     private fun showDescriptionPopup(description: String, context: Context) {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val popupView = inflater.inflate(R.layout.popup_description, null)

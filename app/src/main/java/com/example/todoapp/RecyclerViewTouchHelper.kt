@@ -1,3 +1,5 @@
+package com.example.todoapp
+
 import android.app.AlertDialog
 import android.graphics.Canvas
 import android.graphics.Color
@@ -5,7 +7,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.Adapter.ToDoAdapter
-import com.example.todoapp.R
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
 @Suppress("DEPRECATION")

@@ -16,6 +16,7 @@ import com.example.todoapp.model.ToDoModel
 import com.example.todoapp.utils.DatabaseHelper
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
+@Suppress("DEPRECATION")
 class AddNewTask : BottomSheetDialogFragment() {
     companion object {
         const val TAG = "AddNewTask"

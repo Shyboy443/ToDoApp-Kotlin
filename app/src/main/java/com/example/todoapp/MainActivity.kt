@@ -1,6 +1,5 @@
 package com.example.todoapp
 
-import RecyclerViewTouchHelper
 import android.annotation.SuppressLint
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
@@ -70,6 +69,7 @@ class MainActivity : AppCompatActivity(), OnDialogCloseListener,
         updateUnfinishedTaskCount()
     }
 
+     @SuppressLint("SetTextI18n")
      fun updateUnfinishedTaskCount() {
         val unfinishedTaskCount = myDB.getUnfinishedTaskCount()
         unfinishedTaskCountTextView.text = "Unfinished Tasks: $unfinishedTaskCount"
