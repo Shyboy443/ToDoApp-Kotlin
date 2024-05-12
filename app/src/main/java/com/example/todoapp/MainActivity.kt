@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity(), OnDialogCloseListener,
         updateUnfinishedTaskCount()
     }
 
-    private fun updateUnfinishedTaskCount() {
+     fun updateUnfinishedTaskCount() {
         val unfinishedTaskCount = myDB.getUnfinishedTaskCount()
         unfinishedTaskCountTextView.text = "Unfinished Tasks: $unfinishedTaskCount"
     }
