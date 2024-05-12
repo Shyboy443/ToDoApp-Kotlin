@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,56 +16,50 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity(), OnDialogCloseListener,
     ToDoAdapter.OnCheckedChangeListener {
-    private lateinit var mrecylerview: RecyclerView
+
+    private lateinit var recyclerView: RecyclerView
     private lateinit var fab: FloatingActionButton
     private lateinit var myDB: DatabaseHelper
     private lateinit var mList: MutableList<ToDoModel>
     private lateinit var adapter: ToDoAdapter
+    private lateinit var unfinishedTaskCountTextView: TextView
 
-    @SuppressLint("NotifyDataSetChanged", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Initialize views and database helper
-        mrecylerview = findViewById(R.id.recyletodo)
+        recyclerView = findViewById(R.id.recyletodo)
         fab = findViewById(R.id.fab)
+        unfinishedTaskCountTextView = findViewById(R.id.unfinishedTaskCountTextView)
         myDB = DatabaseHelper(this)
 
-        // Initialize list and adapter
         mList = mutableListOf()
-        adapter = ToDoAdapter(myDB,this)
+        adapter = ToDoAdapter(myDB, this)
         adapter.listener = this
-        // Set up RecyclerView
-        mrecylerview.layoutManager = LinearLayoutManager(this)
-        mrecylerview.adapter = adapter
 
-        // Update unfinished task count and display it
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = adapter
+
         updateUnfinishedTaskCount()
-
-        // Load tasks from database
         loadTasks()
 
-        // Set up FloatingActionButton
         fab.setOnClickListener {
             AddNewTask.newInstance().show(supportFragmentManager, AddNewTask.TAG)
         }
 
-        // Attach ItemTouchHelper for swipe-to-delete functionality
         val itemTouchHelper = ItemTouchHelper(RecyclerViewTouchHelper(adapter))
-        itemTouchHelper.attachToRecyclerView(mrecylerview)
+        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
     override fun onDialogClose(dialogInterface: DialogInterface) {
         mList.clear()
         mList.addAll(myDB.getAllTasks().reversed())
         adapter.setTasks(mList)
-        updateUnfinishedTaskCount() // Update count after adding a new task
+        updateUnfinishedTaskCount()
     }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun loadTasks() {
-        // Load tasks from database and update adapter
         mList.clear()
         mList.addAll(myDB.getAllTasks())
         adapter.notifyDataSetChanged()
@@ -79,9 +72,6 @@ class MainActivity : AppCompatActivity(), OnDialogCloseListener,
 
     private fun updateUnfinishedTaskCount() {
         val unfinishedTaskCount = myDB.getUnfinishedTaskCount()
-        val unfinishedTaskCountTextView: TextView = findViewById(R.id.unfinishedTaskCountTextView)
         unfinishedTaskCountTextView.text = "Unfinished Tasks: $unfinishedTaskCount"
     }
-
-
 }

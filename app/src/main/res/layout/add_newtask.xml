@@ -2,24 +2,45 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <EditText
+        android:id="@+id/edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/edittext"
-        android:paddingStart="7dp"
         android:hint="Enter New Task"
+        android:paddingStart="7dp"
         android:paddingEnd="7dp"/>
+
+    <EditText
+        android:id="@+id/edittext_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Description"
+        android:layout_below="@+id/edittext"
+        android:paddingStart="7dp"
+        android:paddingEnd="7dp"
+        android:paddingTop="10dp"/>
+
+    <Spinner
+        android:id="@+id/spinner_priority"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edittext_description"
+        android:paddingStart="7dp"
+        android:paddingEnd="7dp"
+        android:paddingTop="10dp"
+        android:entries="@array/priority_levels"/> <!-- Make sure you have this array in your strings.xml -->
+
     <Button
+        android:id="@+id/button_save"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:layout_below="@+id/edittext"
-        android:text="Save"
+        android:layout_below="@+id/spinner_priority"
         android:layout_alignParentEnd="true"
-        android:id="@+id/button_save"
+        android:text="Save"
         android:textColor="@color/White"
         android:textSize="20dp"
-         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="30dp"/>
-
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="20dp"/>
 
 </RelativeLayout>

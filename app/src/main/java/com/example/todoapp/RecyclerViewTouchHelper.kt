@@ -8,6 +8,7 @@ import com.example.todoapp.Adapter.ToDoAdapter
 import com.example.todoapp.R
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
+@Suppress("DEPRECATION")
 class RecyclerViewTouchHelper(private val adapter: ToDoAdapter) :
     ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
 

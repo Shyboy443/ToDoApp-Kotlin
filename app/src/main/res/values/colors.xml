@@ -4,6 +4,9 @@
     <color name="PrimaryDark">#0A3D62</color>
     <color name="Accent">#192A56</color>
     <color name="White">#FFFFFF</color>
+    <color name="priority_high">#FF0000</color>  <!-- Red for High -->
+    <color name="priority_medium">#0000FF</color> <!-- Blue for Medium -->
+    <color name="priority_low">#00FF00</color>   <!-- Green for Low -->
 
 
 </resources>
